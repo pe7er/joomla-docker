@@ -1,42 +1,60 @@
 # joomla-docker
-Docker container to run Joomla
+
+Docker to run Joomla site. Docker container that uses docker composer to manage multiple containers to run Joomla:
+- Nginx
+- MySQL
+
+## Start up
+Use ``docker compose`` to start up docker containers configured in ``docker compose.yml`` using:
+```
+$ docker compose up -d
+```
+
+Check docker containers bij project
+```
+$ docker compose ps
+```
+
+Check ALLE docker containers
+```
+$ docker ps
+```
+
+## Exit and close containers
+```
+$ docker compose down
+```
+
+## Import mySQL in container
+### docker exec -i CONTAINER /usr/bin/mysql -u root --password=root DATABASE
+```
+docker exec -i petermartinnl_database_1 /usr/bin/mysql -u myUser --password=mySQL myDB < ./system/database/petermartin_db-20220204.sql
+```
+
+## Reload nginx
+```
+docker exec -it petermartinnl_nginx_1 nginx -s reload
+```
+
+## Login php container
+```
+docker exec -ti petermartinnl_php_1 sh
+```
 
 ## Install Docker
-https://docs.docker.com/engine/install/ubuntu/
+``https://docs.docker.com/engine/install/ubuntu/``
 
-### Install dependencies
-``` 
- $ sudo apt-get update
- $ sudo apt-get install ca-certificates curl gnupg lsb-release
-```
-### Add Docker’s official GPG key:
-```
-$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-$ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-```
-
-### Install docker
-```
-$ sudo apt-get update
-$ sudo apt-get install docker-ce docker-ce-cli containerd.io
-```
-
-### Test
+## Test Docker
+Create a test container that displays a message
 ```
 $ sudo docker run hello-world
 ```
 
 ### Test load latest Ubuntu, display its version and remove
+Create an Ubuntu container that displays its version
 ```
 $ sudo docker run --rm ubuntu:latest cat /etc/os-release
 ```
-
-### Install docker composer
-```
-$ sudo apt install docker-compose
-```
-
-## Deploy Container
 
 ### Build docker container
 ```
@@ -57,5 +75,5 @@ $ sudo docker run --rm -p 80:80 -v /home/pe7er/www/mydocker/src:/var/www/html lo
 
 ### docker compose
 ```
-$ docker-compose up
+$ docker compose up
 ```

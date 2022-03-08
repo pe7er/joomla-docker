@@ -1,1 +1,11 @@
-.idea/
+.idea
+/public_html/administrator/components/com_akeeba/backup/
+/public_html/administrator/components/com_akeebabackup/backup/
+#/public_html/administrator/cache/
+#/public_html/administrator/logs/
+/public_html/.htaccess
+/public_html/cache/
+#/public_html/configuration.php
+/public_html/templates/yootheme/cache/
+#/public_html/tmp/
+

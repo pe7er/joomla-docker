@@ -1,34 +1,43 @@
-version: '3.3'
+version: '3.7'
 
 services:
+
   nginx:
     build:
       context: .
-      dockerfile: nginx.dockerfile
+      dockerfile: ./docker/server/nginx/nginx.dockerfile
     ports:
       - 80:80
     volumes:
-      - ./src/:/var/www/html
+      - ./public_html/:/var/www/html
     depends_on:
-      - mysql
+      - database
       - php
-  mysql:
-#    image: mysql:5.7
-    build:
-      context: .
-      dockerfile: mysql.dockerfile
-    ports:
-      - 3306:3306
+
+  database:
+    image: mysql:5.7
+    #image: mariadb:focal
+    restart: always
     environment:
-      MYSQL_DATABASE: mydatabase
-      MYSQL_USER: mydbuser
-      MYSQL_PASSWORD: secret
-      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: 'myDB'
+      # So you don't have to use root, but you can if you like
+      MYSQL_USER: 'myUser'
+      # You can use whatever password you like
+      MYSQL_PASSWORD: 'myPassword'
+      # Password for root access
+      MYSQL_ROOT_PASSWORD: 'myPassword'
+    ports:
+      # <Port exposed> : <MySQL Port running inside container>
+      - '3306:3306'
     volumes:
-      - ./mysql:/var/lib/mysql
+      - ./docker/db/mysql:/var/lib/mysql
+    user: "1000:1000"
+
   php:
     build:
       context: .
-      dockerfile: php.dockerfile
+      dockerfile: ./docker/server/php/php.dockerfile
     volumes:
-      - ./src/:/var/www/html
+      - ./public_html/:/var/www/html
+      - ./docker/server/php/ini/php-ini-overrides.ini:/usr/local/etc/php/conf.d/custom.ini
+    user: "1000:1000"
