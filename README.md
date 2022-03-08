@@ -28,17 +28,17 @@ $ docker compose down
 ## Import mySQL in container
 ### docker exec -i CONTAINER /usr/bin/mysql -u root --password=root DATABASE
 ```
-docker exec -i petermartinnl_database_1 /usr/bin/mysql -u myUser --password=mySQL myDB < ./system/database/petermartin_db-20220204.sql
+docker exec -i joomla-docker-database-1 /usr/bin/mysql -u myUser --password=myPasswordL myDB < ./some-sql-file.sql
 ```
 
 ## Reload nginx
 ```
-docker exec -it petermartinnl_nginx_1 nginx -s reload
+docker exec -i joomla-docker-nginx-1 nginx -s reload
 ```
 
 ## Login php container
 ```
-docker exec -ti petermartinnl_php_1 sh
+docker exec -i joomla-docker-php-1 sh
 ```
 
 ## Install Docker
@@ -66,8 +66,8 @@ $ docker build --no-cache -t local-nginx .
 ### map absolute path on local system to inside docker container path
 
 ```
-$ sudo docker run --rm -p 80:80 -v /home/pe7er/www/mydocker/src/index.html:/var/www/html local-nginx
-$ sudo docker run --rm -p 80:80 -v /home/pe7er/www/mydocker/src:/var/www/html local-nginx
+$ sudo docker run --rm -p 80:80 -v /home/pe7er/www/db8/joomla-docker/public_html/index.html:/var/www/html local-nginx
+$ sudo docker run --rm -p 80:80 -v /home/pe7er/www/db8/joomla-docker/public_html:/var/www/html local-nginx
 ```
 
 ### Check docker containers
