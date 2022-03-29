@@ -1,7 +1,9 @@
-
-# Get nginx from https://hub.docker.com/_/php
-#FROM php:8-fpm-alpine
+# Get php/nginx from https://hub.docker.com/_/php
 FROM php:8.0-fpm-alpine
+
+# When using PHP 7.4, we'll need to use a different apline package
+# https://stackoverflow.com/questions/70181574/php-fpm-alpine-docker-image-7-4-installs-php-version-8-0
+# FROM php:7.4-fpm-alpine3.14
 
 # Create env variables to hold user + group value
 ENV PHPUSER=pe7er
