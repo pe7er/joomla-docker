@@ -28,7 +28,7 @@ $ docker compose down
 ## Import mySQL in container
 ### docker exec -i CONTAINER /usr/bin/mysql -u root --password=root DATABASE
 ```
-docker exec -i joomla-docker-database-1 /usr/bin/mysql -u myUser --password=myPasswordL myDB < ./some-sql-file.sql
+docker exec -i joomla-docker-database-1 /usr/bin/mysql -u myUser --password=myPassword myDB < ./some-sql-file.sql
 ```
 
 ## Reload nginx
